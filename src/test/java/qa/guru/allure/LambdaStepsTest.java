@@ -1,36 +1,31 @@
 package qa.guru.allure;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.selenide.AllureSelenide;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Configuration.browser;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 import static org.openqa.selenium.By.linkText;
 
-public class LambdaStepsTest {
+public class LambdaStepsTest extends TestBase {
 
   private static final String REPOSITORY = "Kristina0610/qaguru_hw_11";
   private static final int ISSUE = 2;
 
   @Test
   @DisplayName("Тест нахождения элемента в issue (лямбда шаги через step (name, () -> {}))")
+  @Feature("Issue в репозитории")
+  @Story("Отображение Issue во вкладке Issue")
   @Owner("Kristina")
   @Severity(SeverityLevel.CRITICAL)
+  @Link(value = "prod", url = "https://github.com")
   public void testLambdaStep() {
-    SelenideLogger.addListener("allure", new AllureSelenide());
-
     step("Открывем главную страницу", () -> {
-      browser = "firefox";
-      open("https://github.com/");
+      open("/");
     });
     step("Ищем репозиторий " + REPOSITORY, () -> {
       $(".header-search-button").click();
@@ -51,10 +46,12 @@ public class LambdaStepsTest {
 
   @Test
   @DisplayName("Тест нахождения элемента в issue (шаги с аннотацией @Step)")
+  @Feature("Issue в репозитории")
+  @Story("Отображение Issue во вкладке Issue")
   @Owner("Kristina")
   @Severity(SeverityLevel.CRITICAL)
+  @Link(value = "prod", url = "https://github.com")
   public void testAnnotatedStep() {
-    SelenideLogger.addListener("allure", new AllureSelenide());
     AnnotationSteps steps = new AnnotationSteps();
 
     steps.openMainPage();

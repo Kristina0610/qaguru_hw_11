@@ -1,30 +1,25 @@
 package qa.guru.allure;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.selenide.AllureSelenide;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Configuration.browser;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static org.openqa.selenium.By.linkText;
 
-public class SelenideListenerTest {
+public class SelenideListenerTest extends TestBase {
   @Test
   @DisplayName("Тест нахождения элемента в issue (чистый Selenide (с Listener))")
+  @Feature("Issue в репозитории")
+  @Story("Отображение Issue во вкладке Issue")
   @Owner("Kristina")
   @Severity(SeverityLevel.CRITICAL)
+  @Link(value = "prod", url = "https://github.com")
   public void testIssueSearch() {
-    SelenideLogger.addListener("allure", new AllureSelenide());
-
-    browser = "firefox";
-    open("https://github.com/");
+    open("/");
     $(".header-search-button").click();
     $("#query-builder-test").setValue("Kristina0610/qaguru_hw_11");
     $("#query-builder-test").submit();
