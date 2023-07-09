@@ -55,12 +55,13 @@ public class LambdaStepsTest {
   @Severity(SeverityLevel.CRITICAL)
   public void testAnnotatedStep() {
     SelenideLogger.addListener("allure", new AllureSelenide());
-    AnnotationStepsTest steps = new AnnotationStepsTest();
+    AnnotationSteps steps = new AnnotationSteps();
 
     steps.openMainPage();
     steps.searchForRepository(REPOSITORY);
     steps.clickOnRepositoryLink(REPOSITORY);
     steps.openIssueTab();
     steps.shouldSeeIssueWithNumber(ISSUE);
+    steps.takeScreenshot();
   }
 }

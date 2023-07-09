@@ -17,7 +17,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.openqa.selenium.By.linkText;
 
 
-public class AnnotationStepsTest {
+public class AnnotationSteps {
 
   @Step("Открывем главную страницу")
   public void openMainPage() {
